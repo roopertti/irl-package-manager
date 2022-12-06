@@ -11,3 +11,6 @@ export const getDbPassword = () => process.env.DB_PASSWORD || 'dev'
 export const getDbName = () => process.env.DB_NAME || 'irl-package-manager'
 
 export const getDbPort = () => Number(process.env.DB_PORT) || 5432
+
+export const getGoogleClientId = () =>
+  process.env.GOOGLE_CLIENT_ID || 'no client id set'

@@ -1,9 +1,9 @@
-import { Session } from "next-auth";
-import { SessionProvider } from "next-auth/react"
-import { ElementType } from "react";
+import { Session } from 'next-auth'
+import { SessionProvider } from 'next-auth/react'
+import { ElementType } from 'react'
 
 type Props = {
-  Component: ElementType;
+  Component: ElementType
   pageProps: { session: Session }
 }
 
