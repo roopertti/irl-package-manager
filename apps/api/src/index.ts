@@ -1,7 +1,13 @@
 import express from 'express'
+import dotenv from 'dotenv'
+import { getPort } from './utils/config'
 
 const app = express()
 
-app.listen(3000, () => {
-  console.log('listening to 3000')
+dotenv.config()
+
+const PORT = getPort()
+
+app.listen(PORT, () => {
+  console.log(`Listening to ${PORT}`)
 })
