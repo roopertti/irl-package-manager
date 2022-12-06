@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import { getPort } from './utils/config'
+import { getLogger } from './utils/logger'
 
 const app = express()
 
@@ -8,6 +9,8 @@ dotenv.config()
 
 const PORT = getPort()
 
+const logger = getLogger();
+
 app.listen(PORT, () => {
-  console.log(`Listening to ${PORT}`)
+  logger.info(`Listening to ${PORT}`)
 })
