@@ -5,6 +5,9 @@ module.exports = {
     node: true,
     commonjs: true
   },
+  globals: {
+    'jest/globals': true,
+  },
   extends: [
     'standard',
     'turbo',
@@ -16,7 +19,8 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: [
-    '@typescript-eslint'
+    '@typescript-eslint',
+    'jest'
   ],
   rules: {
     "@next/next/no-html-link-for-pages": "off",
