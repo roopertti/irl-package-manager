@@ -1,10 +1,24 @@
-import { Button } from 'ui'
+import { useSession, signIn, signOut } from 'next-auth/react'
+import { useEffect } from 'react';
 
 export default function Web() {
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    console.log(session)
+  }, [])
+
   return (
     <div>
       <h1>Web</h1>
-      <Button />
+      { session &&
+        <button onClick={() => signOut()}>
+          Log out
+        </button>
+      }
+      <button onClick={() => signIn()}>
+        Google log in
+      </button>
     </div>
   )
 }
