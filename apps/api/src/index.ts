@@ -14,7 +14,7 @@ const PORT = getPort()
 const db = getDbConnection()
 const logger = getLogger()
 
-app.use('/user', getUserRoutes())
+app.use('/user', getUserRoutes({ db, logger }))
 
 app.listen(PORT, () => {
   logger.info(`Listening to ${PORT}`)

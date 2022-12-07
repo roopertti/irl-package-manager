@@ -7,7 +7,7 @@ import {
   getDbUser,
 } from './config'
 
-type DBInstance = Knex
+export type DBInstance = Knex
 
 export const getDbConnection = (): DBInstance => {
   return knex({

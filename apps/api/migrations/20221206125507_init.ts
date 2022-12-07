@@ -3,13 +3,13 @@ import { Knex } from 'knex'
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.withSchema('public').createTable('user', (table) => {
     table.bigIncrements('id').primary()
-    table.uuid('uuid').notNullable()
-    table.string('externalId').notNullable()
+    table.uuid('uuid').notNullable().unique()
+    table.string('externalId').notNullable().unique()
     table.string('name').notNullable()
     table.string('email').notNullable()
     table.string('authProvider')
-    table.timestamp('createdAt')
-    table.timestamp('lastLoginAt')
+    table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
+    table.timestamp('lastLoginAt').nullable()
   })
 
   await knex.schema.withSchema('public').createTable('packlist', (table) => {
@@ -21,13 +21,13 @@ export async function up(knex: Knex): Promise<void> {
       .inTable('user')
       .onDelete('CASCADE')
       .onUpdate('CASCADE')
-    table.uuid('uuid').notNullable()
+    table.uuid('uuid').notNullable().unique()
     table.string('name').notNullable()
     table.string('description').nullable()
-    table.string('slug').notNullable()
+    table.string('slug').notNullable().unique()
     table.string('visibility').notNullable().defaultTo('HIDDEN')
-    table.timestamp('createdAt')
-    table.timestamp('lastLoginAt')
+    table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
+    table.timestamp('updatedAt').nullable()
   })
 
   await knex.schema
@@ -41,7 +41,7 @@ export async function up(knex: Knex): Promise<void> {
         .inTable('itemCategory')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
-      table.uuid('uuid').notNullable()
+      table.uuid('uuid').notNullable().unique()
       table.string('name').notNullable()
       table.string('type').notNullable()
     })
@@ -62,12 +62,12 @@ export async function up(knex: Knex): Promise<void> {
       .inTable('itemCategory')
       .onDelete('CASCADE')
       .onUpdate('CASCADE')
-    table.uuid('uuid').notNullable()
+    table.uuid('uuid').notNullable().unique()
     table.string('name').notNullable()
     table.string('description').nullable()
     table.integer('weight').nullable()
-    table.timestamp('createdAt')
-    table.timestamp('lastLoginAt')
+    table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
+    table.timestamp('updatedAt').nullable()
   })
 
   await knex.schema.withSchema('public').createTable('placement', (table) => {
